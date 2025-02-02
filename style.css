@@ -1,0 +1,61 @@
+
+    body{
+            background-color: black;
+        }
+        #display{
+            width: 370px;
+            height: 590px;
+            border: 1px solid rgb(213,209,209);
+            border-radius: 4px;
+            text-align: center;
+            margin: 55px;
+            margin-left: 33%;
+        }
+        #show{
+            width: 300px;
+            height: 40px;
+            border: none;
+            outline: none;
+            background-color: transparent;
+            color: white;
+            margin: 20px;
+            margin-top: 11px;
+            text-align: right;
+            font-size: 40px;
+        }
+        ::placeholder{
+            color: white;
+        }
+#sym{
+    color: rgb(238, 10, 10);
+}
+#equl{
+    background-color: rgb(185, 84, 16);
+    color: white;
+}
+
+        .btn{
+            width: 60px;
+            height: 60px;
+            background-color: transparent;
+            color: rgb(52, 122, 168);
+            border: none;
+            border-radius: 50%;
+            border: none;
+            outline: none;
+            font-size: 22px;
+            margin: 10px;
+          box-shadow: -4px -4px 10px rgba(201, 201, 201, 0.363);
+        }
+        p{
+            width: 300px;
+            height: 40px;
+            border: none;
+            outline: none;
+            background-color: transparent;
+            color: rgb(52, 122, 168);
+            margin: 20px;
+            margin-top: 11px;
+            text-align: left;
+            font-size: 40px;
+        }
