@@ -7,41 +7,66 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<form action="" id="display">
-    <input type="text" id="show" value="" placeholder="0">
+<form name="display" id="display">
+    <input type="text" id="show" name="show" value="" placeholder="0" readonly>
     <hr>
     <br>
     <p>
         calculater
-       
     </p>
-    <input type="button" id="sym" class="btn" value="AC" onclick="display.show.value ='  ' ">
-    <input type="button" id="sym" class="btn" value="DEL" onclick="display.show.value = display.show.value.toString().slice(0, -1)">
-    <input type="button" id="sym" class="btn" value="." onclick="display.show.value +='.'">
-    <input type="button" id="sym" class="btn" value="%" onclick="display.show.value +='%'">
+    <input type="button" id="sym" class="btn" value="AC" onclick="clearDisplay()">
+    <input type="button" id="sym" class="btn" value="DEL" onclick="deleteLast()">
+    <input type="button" id="sym" class="btn" value="." onclick="appendValue('.')">
+    <input type="button" id="sym" class="btn" value="%" onclick="appendValue('%')">
     <br>
-    <input type="button" class="btn" value="1" onclick="display.show.value +='1'">
-    <input type="button" class="btn" value="2" onclick="display.show.value +='2'">
-    <input type="button" class="btn" value="3" onclick="display.show.value +='3'">
-    <input type="button" id="sym" class="btn" value="/" onclick="display.show.value +='/'">
+    <input type="button" class="btn" value="1" onclick="appendValue('1')">
+    <input type="button" class="btn" value="2" onclick="appendValue('2')">
+    <input type="button" class="btn" value="3" onclick="appendValue('3')">
+    <input type="button" id="sym" class="btn" value="/" onclick="appendValue('/')">
     <br>
-    <input type="button" class="btn" value="4" onclick="display.show.value +='4'">
-    <input type="button" class="btn" value="5" onclick="display.show.value +='5'">
-    <input type="button" class="btn" value="6" onclick="display.show.value +='6'">
-    <input type="button" id="sym" class="btn" value="*" onclick="display.show.value +='*'">
+    <input type="button" class="btn" value="4" onclick="appendValue('4')">
+    <input type="button" class="btn" value="5" onclick="appendValue('5')">
+    <input type="button" class="btn" value="6" onclick="appendValue('6')">
+    <input type="button" id="sym" class="btn" value="*" onclick="appendValue('*')">
     <br>
-    <input type="button" class="btn" value="7" onclick="display.show.value +='7'">
-    <input type="button" class="btn" value="8" onclick="display.show.value +='8'">
-    <input type="button" class="btn" value="9" onclick="display.show.value +='9'">
-    <input type="button" id="sym" class="btn" value="-" onclick="display.show.value +='-'">
+    <input type="button" class="btn" value="7" onclick="appendValue('7')">
+    <input type="button" class="btn" value="8" onclick="appendValue('8')">
+    <input type="button" class="btn" value="9" onclick="appendValue('9')">
+    <input type="button" id="sym" class="btn" value="-" onclick="appendValue('-')">
     <br>
-    <input type="button" class="btn" value="00" onclick="display.show.value +='00'">
-    <input type="button" class="btn" value="0" onclick="display.show.value +='0'">
-    <input type="button" id="equl" class="btn" value="=" onclick="display.show.value = eval(display.show.value)">
-    <input type="button" id="sym" class="btn" value="+" onclick="display.show.value +='+'">
-
+    <input type="button" class="btn" value="00" onclick="appendValue('00')">
+    <input type="button" class="btn" value="0" onclick="appendValue('0')">
+    <input type="button" id="equl" class="btn" value="=" onclick="calculate()">
+    <input type="button" id="sym" class="btn" value="+" onclick="appendValue('+')">
 </form>
 
-    
+<script>
+    const display = document.display;
+
+    function appendValue(val) {
+        display.show.value += val;
+    }
+
+    function clearDisplay() {
+        display.show.value = '';
+    }
+
+    function deleteLast() {
+        display.show.value = display.show.value.toString().slice(0, -1);
+    }
+
+    function calculate() {
+        try {
+            let input = display.show.value;
+            // Convert percentages like 50% -> 0.5
+            input = input.replace(/(\d+)%/g, (match, p1) => {
+                return Number(p1)/100;
+            });
+            display.show.value = eval(input);
+        } catch(e) {
+            alert('Invalid Input');
+        }
+    }
+</script>
 </body>
 </html>
