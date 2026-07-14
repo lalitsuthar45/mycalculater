@@ -1,82 +1,409 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-    body{
-            background-color: black;
-        }
-        #display{
-            width: 370px;
-            height: 590px;
-            border: 1px solid rgb(213,209,209);
-            border-radius: 4px;
-            text-align: center;
-            margin: 55px;
-            margin-left: 33%;
-        }
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+}
 
+body {
+    min-height: 100vh;
+    min-height: 100dvh;
+    background:
+        radial-gradient(
+            circle at 50% 8%,
+            rgba(0, 119, 255, 0.14),
+            transparent 32%
+        ),
+        radial-gradient(
+            circle at 50% 100%,
+            rgba(255, 0, 100, 0.08),
+            transparent 34%
+        ),
+        #020202;
+
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+
+    overflow-x: hidden;
+}
+
+/* Full-phone layout without outer border */
+#display {
+    width: 100%;
+    min-height: 100vh;
+    min-height: 100dvh;
+
+    margin: 0;
+    padding:
+        max(20px, env(safe-area-inset-top))
+        12px
+        max(20px, env(safe-area-inset-bottom));
+
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+
+    text-align: center;
+
+    /* Important: flex removed so rows remain correct */
+    display: block;
+}
+
+/* Calculator result area */
+#show {
+    display: block;
+
+    width: min(100%, 390px);
+    height: clamp(150px, 30vh, 300px);
+
+    margin: 0 auto 8px;
+    padding: 12px 8px;
+
+    border: none;
+    outline: none;
+
+    background: transparent;
+    color: white;
+
+    text-align: right;
+    font-size: clamp(48px, 14vw, 70px);
+    font-weight: 400;
+}
+
+#show::placeholder {
+    color: white;
+    opacity: 1;
+}
+
+/* Remove old horizontal border */
+hr {
+    display: none;
+}
+
+/* Remove the extra space created by HTML <br> after hr */
+hr + br {
+    display: none;
+}
+
+/* Calculator heading */
+p {
+    width: min(100%, 390px);
+
+    margin: 0 auto 16px;
+    padding: 0 8px;
+
+    color: #52b7ff;
+
+    text-align: left;
+    font-size: clamp(26px, 8vw, 38px);
+    font-weight: 700;
+    line-height: 1.2;
+    text-transform: capitalize;
+
+    text-shadow:
+        0 0 10px rgba(0, 174, 255, 0.6),
+        0 0 24px rgba(0, 102, 255, 0.3);
+}
+
+/* All calculator buttons */
+.btn {
+    position: relative;
+
+    width: clamp(62px, 19vw, 82px);
+    height: clamp(62px, 19vw, 82px);
+
+    margin: clamp(4px, 1.4vw, 7px);
+
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    border-radius: 50%;
+    outline: none;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255, 255, 255, 0.075),
+            rgba(255, 255, 255, 0.018)
+        );
+
+    color: #52b7ff;
+
+    font-size: clamp(19px, 5.5vw, 25px);
+    font-weight: 600;
+
+    cursor: pointer;
+    overflow: hidden;
+    vertical-align: middle;
+
+    -webkit-tap-highlight-color: transparent;
+
+    box-shadow:
+        -4px -4px 11px rgba(255, 255, 255, 0.045),
+        7px 7px 18px rgba(0, 0, 0, 0.85);
+
+    transition:
+        transform 0.22s ease,
+        background 0.3s ease,
+        color 0.3s ease,
+        box-shadow 0.3s ease,
+        border-color 0.3s ease;
+}
+
+.btn::before {
+    content: "";
+
+    position: absolute;
+    top: -125%;
+    left: -125%;
+
+    width: 250%;
+    height: 250%;
+
+    background:
+        linear-gradient(
+            135deg,
+            transparent 34%,
+            rgba(255, 255, 255, 0.38),
+            transparent 66%
+        );
+
+    transform: rotate(25deg);
+    transition: 0.5s ease;
+    pointer-events: none;
+}
+
+.btn:hover::before {
+    top: 72%;
+    left: 72%;
+}
+
+.btn:hover {
+    color: white;
+    border-color: rgba(0, 191, 255, 0.8);
+
+    background:
+        linear-gradient(
+            135deg,
+             #0072ff,
+            #0072ff,
+         #0072ff,
+        );
+
+    transform: translateY(-4px) scale(1.05);
+
+    
+}
+
+.btn:active {
+    transform: scale(0.88);
+}
+
+/* Operator buttons */
+/* Operator Buttons */
+/* Operators */
+.op{
+    color:#dc0288;
+    font-size:30px;
+    font-weight:700;
+    transition:all .12s ease;
+}
+
+.op:hover{
+
+    color:#fff;
+
+    background:linear-gradient(
+        135deg,
+        #fa0f79,
+        #ff2e93
+    );
+
+    border-color:#880f51;
+
+    transform:translateY(-2px) scale(1.03);
+
+    box-shadow:
+        0 5px 12px rgba(25,118,210,.28),
+        0 0 10px rgba(25,118,210,.18);
+}
+/* Equal button */
+#equl {
+    color: white;
+    border-color: rgba(255, 111, 0, 0.45);
+
+    background:
+        linear-gradient(
+            135deg,
+            #ff9f00,
+            #ff5e00,
+            #ff2b55
+        );
+
+    box-shadow:
+        0 0 12px rgba(255, 112, 0, 0.65),
+        7px 7px 18px rgba(0, 0, 0, 0.82);
+}
+
+#equl:hover {
+    color: white;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f55200,
+            #f55200,
+            #f55200,
            
-        #show{
-            width: 300px;
-            height: 40px;
-            border: none;
-            outline: none;
-            background-color: transparent;
-            color: white;
-            margin: 20px;
-            margin-top: 11px;
-            text-align: right;
-            font-size: 40px;
-        }
-        ::placeholder{
-            color: white;
-        }
+        );
 
-
-        
-#sym{
-    color: rgb(238, 10, 10);
-}
-#equl{
-    background-color: rgb(207, 105, 3);
-    color: white;
+   
 }
 
-#equl:hover{
-    background-color: rgb(28, 105, 206);
-    color: white;
+/* Normal phones */
+@media screen and (max-width: 480px) {
+    #display {
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    #show {
+        height: clamp(170px, 34vh, 330px);
+        font-size: clamp(48px, 15vw, 68px);
+    }
+
+    p {
+        margin-bottom: 12px;
+        font-size: 30px;
+    }
+
+    .btn {
+        width: clamp(62px, 20vw, 78px);
+        height: clamp(62px, 20vw, 78px);
+        margin: clamp(3px, 1.2vw, 6px);
+    }
 }
 
-        .btn{
-            width: 60px;
-            height: 60px;
-            background-color: transparent;
-            color: rgb(52, 122, 168);
-            border: none;
-            border-radius: 50%;
-            border: none;
-            outline: none;
-            font-size: 22px;
-            margin: 10px;
-          box-shadow: -4px -4px 10px rgba(201, 201, 201, 0.363);
-        }
-.btn:hover{
-    background-color: rgb(28, 105, 206);
-    color: white;
+/* Phones with small height */
+@media screen and (max-height: 720px) {
+    #display {
+        padding-top: 6px;
+        padding-bottom: 8px;
+    }
+
+    #show {
+        height: 105px;
+        font-size: 44px;
+    }
+
+    p {
+        margin-bottom: 5px;
+        font-size: 23px;
+    }
+
+    .btn {
+        width: 53px;
+        height: 53px;
+        margin: 3px;
+        font-size: 17px;
+    }
 }
 
-#sym:hover{
-    background-color: rgb(238, 10, 10);
-    color: black;
+/* Very small phones */
+@media screen and (max-width: 340px) {
+    #show {
+        height: 100px;
+        font-size: 42px;
+    }
+
+    p {
+        font-size: 22px;
+    }
+
+    .btn {
+        width: 53px;
+        height: 53px;
+        margin: 3px;
+        font-size: 17px;
+    }
+}
+
+/* Laptop */
+@media screen and (min-width: 769px) {
+    #display {
+        max-width: 520px;
+        min-height: 100vh;
+        margin: auto;
+        padding-top: 30px;
+    }
+
+    #show {
+        height: 160px;
+        max-width: 410px;
+        font-size: 58px;
+    }
+
+    p {
+        max-width: 410px;
+    }
+
+    .btn {
+        width: 72px;
+        height: 72px;
+        margin: 7px;
+        font-size: 23px;
+    }
+}
+
+/* Touch devices */
+@media (hover: none) {
+    .btn:hover,
+    #sym:hover,
+    #equl:hover {
+        transform: none;
+    }
+
+    .btn:active,
+    #sym:active,
+    #equl:active {
+        transform: scale(0.87);
+        filter: brightness(1.25);
+    }
+}
+.action{
+    font-size:20px;
+    font-weight:600;
+}
+
+.op{
+    font-size:30px;
+    font-weight:700;
+}
+.action{
+color:#26d3dc;
+    
 }
 
 
-        p{
-            width: 300px;
-            height: 40px;
-            border: none;
-            outline: none;
-            background-color: transparent;
-            color: rgb(52, 122, 168);
-            margin: 20px;
-            margin-top: 11px;
-            text-align: left;
-            font-size: 40px;
-        }
+
+.action:hover {
+   color:#fff;
+
+    background:linear-gradient(
+        135deg,
+        #0ea7e4,
+        #0fb8e7
+    );
+
+    border-color:#880f51;
+
+    transform:translateY(-2px) scale(1.03);
+
+    box-shadow:
+        0 5px 12px rgba(25,118,210,.28),
+        0 0 10px rgba(25,118,210,.18);
+}
